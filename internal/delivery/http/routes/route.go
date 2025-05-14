@@ -1,0 +1,10 @@
+package route
+
+import (
+	handlers "github.com/Infamia2334/go-tasks/internal/delivery/http/handlers"
+	"github.com/gorilla/mux"
+)
+
+func RegisterRoutes(router *mux.Router, taskHandler *handlers.TaskHandler) {
+	router.HandleFunc("/tasks", taskHandler.GetTasks).Methods("GET")
+}

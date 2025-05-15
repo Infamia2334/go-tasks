@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"strconv"
 	"time"
 
@@ -11,6 +10,7 @@ import (
 type TaskService interface {
 	GetTasks() []models.Task
 	CreateTask(task models.Task) models.Task
+	GetPaginatedTasks(page, limit int, status string, assigner string, assigned_to string) []models.Task
 }
 
 type taskServiceStruct struct {
@@ -48,8 +48,38 @@ func (taskService *taskServiceStruct) GetTasks() []models.Task {
 	return taskService.tasks
 }
 
+func (taskService *taskServiceStruct) GetPaginatedTasks(page, limit int, status string, assigner string, assigned_to string) []models.Task {
+	var filtered []models.Task
+
+	for i, task := range taskService.tasks {
+		if i >= (page-1)*limit && i < page*limit {
+			if (status == "" || task.Status == status) &&
+				(assigner == "" || task.Assigner == assigner) &&
+				(assigned_to == "" || task.AssignedTo == assigned_to) {
+				filtered = append(filtered, task)
+			}
+		}
+	}
+
+	if len(filtered) == 0 {
+		return []models.Task{}
+	}
+
+	offset := (page - 1) * limit
+	if offset >= len(filtered) {
+		return []models.Task{}
+	}
+
+	end := offset + limit
+	if end > len(filtered) {
+		end = len(filtered)
+	}
+
+	filtered = filtered[offset:end]
+	return filtered
+}
+
 func (taskService *taskServiceStruct) CreateTask(task models.Task) models.Task {
-	fmt.Printf("Creating task: %+v\n", task)
 	task.ID = strconv.Itoa(len(taskService.tasks) + 1)
 	task.CreatedAt = time.Now().Format("2006-01-02")
 	task.UpdatedAt = time.Now().Format("2006-01-02")

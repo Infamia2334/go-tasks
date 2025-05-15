@@ -7,4 +7,5 @@ import (
 
 func RegisterRoutes(router *mux.Router, taskHandler *handlers.TaskHandler) {
 	router.HandleFunc("/tasks", taskHandler.GetTasks).Methods("GET")
+	router.HandleFunc("/task", taskHandler.CreateTask).Methods("POST")
 }

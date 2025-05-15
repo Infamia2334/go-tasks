@@ -1,9 +1,16 @@
 package services
 
-import "github.com/Infamia2334/go-tasks/internal/models"
+import (
+	"fmt"
+	"strconv"
+	"time"
+
+	"github.com/Infamia2334/go-tasks/internal/models"
+)
 
 type TaskService interface {
 	GetTasks() []models.Task
+	CreateTask(task models.Task) models.Task
 }
 
 type taskServiceStruct struct {
@@ -18,7 +25,7 @@ func NewTaskService() TaskService {
 				Name:        "Task Uno",
 				Description: "This is the first task",
 				Status:      "Pending",
-				Assignee:    "Alexender Dumas",
+				Assigner:    "Alexender Dumas",
 				AssignedTo:  "Javert",
 				CreatedAt:   "2025-05-14",
 				UpdatedAt:   "2025-05-14",
@@ -28,7 +35,7 @@ func NewTaskService() TaskService {
 				Name:        "Task Dos",
 				Description: "This is the second task",
 				Status:      "In Progress",
-				Assignee:    "Victor Hugo",
+				Assigner:    "Victor Hugo",
 				AssignedTo:  "Jean Valjean",
 				CreatedAt:   "2025-05-15",
 				UpdatedAt:   "2025-05-15",
@@ -39,4 +46,14 @@ func NewTaskService() TaskService {
 
 func (taskService *taskServiceStruct) GetTasks() []models.Task {
 	return taskService.tasks
+}
+
+func (taskService *taskServiceStruct) CreateTask(task models.Task) models.Task {
+	fmt.Printf("Creating task: %+v\n", task)
+	task.ID = strconv.Itoa(len(taskService.tasks) + 1)
+	task.CreatedAt = time.Now().Format("2006-01-02")
+	task.UpdatedAt = time.Now().Format("2006-01-02")
+	taskService.tasks = append(taskService.tasks, task)
+
+	return task
 }

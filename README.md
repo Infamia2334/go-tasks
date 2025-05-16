@@ -19,6 +19,7 @@ The core requirements:
 
 ### 📁 Project Structure
 
+```bash
 go-tasks/
 ├── cmd/
 │ └── server/ # Entry point of the application
@@ -26,14 +27,15 @@ go-tasks/
 ├── internal/
 │ ├── delivery/
 │ │ └── http/
-│ │ ├── handlers/ # HTTP handlers
-│ │ └── routes/ # Route definitions
+│ │   ├── handlers/ # HTTP handlers
+│ │   └── routes/ # Route definitions
 │ ├── models/ # Task struct and types
 │ ├── services/ # Business logic layer
-│ └── store/ # In-memory data simulation
+│ └── repository/ # Future data layer with persistant db
 ├── go.mod
+├── Makefile
 └── README.md
-
+```
 ### 🤔 Why This Structure?
 
 - **`cmd/`**: Conventional Go layout for application entry points.

@@ -1,6 +1,6 @@
 # 🧰 Go Task Management Service
 
-A simple **Task Management Microservice** written in Go, built to demonstrate backend engineering principles and learn Go. The service allows users to **Create**, **Read**, **Update**, and **Delete** tasks, supporting **pagination** and **filtering**.
+A simple **Task Management Microservice** written in Go, built to demonstrate backend engineering principles and learn Go. The service allows users to **Create** and **Read** tasks, supporting **pagination** and **filtering**.
 
 ---
 
@@ -8,7 +8,7 @@ A simple **Task Management Microservice** written in Go, built to demonstrate ba
 
 The core requirements:
 
-- CRUD operations for tasks.
+- CRUD(Create and Read for now) operations for tasks.
 - Support pagination and filtering in `GET /tasks`.
 - Follow microservice architecture principles like single responsibility, loose coupling, and separation of concerns.
 - Avoid tight coupling between components to make the system extendable (e.g., for adding users, notifications, etc.).

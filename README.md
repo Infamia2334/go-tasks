@@ -66,7 +66,7 @@ make run
 
 All API endpoints and usage examples are available via Postman.
 
-👉 [View Full API Docs (Postman)]([https://documenter.getpostman.com/view/your-doc-id](https://documenter.getpostman.com/view/13360065/2sB2qWFimy))
+👉 [View Full API Docs - Postman](https://documenter.getpostman.com/view/13360065/2sB2qWFimy)
 
 ---
 
